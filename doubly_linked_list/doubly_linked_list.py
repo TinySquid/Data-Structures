@@ -1,8 +1,9 @@
-"""Each ListNode holds a reference to its previous node
-as well as its next node in the List."""
 
 
 class ListNode:
+    """Each ListNode holds a value and reference to its previous node
+    as well as its next node in the List."""
+
     def __init__(self, value, prev=None, next=None):
         self.value = value
         self.prev = prev
@@ -50,6 +51,15 @@ class DoublyLinkedList:
 
     def __len__(self):
         return self.length
+
+    def __str__(self):
+        node = self.head
+
+        values = ""
+        while node is not None:
+            values += str(node.value) + " "
+            node = node.next
+        return values
 
     def add_to_head(self, value):
         new_node = ListNode(value)
@@ -125,30 +135,45 @@ class DoublyLinkedList:
         return None
 
     def delete(self, node):
-        # TODO: Catch errors if list is empty or node is not in list
-        # For now assumine node is in list
+        # If node doesn't exist, return
+        if not self.exists(node.value):
+            return 
+
+        # Node exists
+
         self.length -= 1
 
         # Node is the only item in list
         if self.head is self.tail:
             self.head = None
             self.tail = None
+
         # Node is head
         elif node is self.head:
             self.head = self.head.next
             node.delete()
+
         # Node is tail
         elif node is self.tail:
             self.tail = self.tail.prev
             node.delete()
+
         # Node is between head and tail
         else:
             node.delete()
 
-    def __str__(self):
+    def get_max(self):
         node = self.head
-        values = ""
-        while node is not None:
-            values += str(node.value) + " "
-            node = node.next
-        return values
+
+        max_value = node.value
+
+        while node:
+            if node.value > max_value:
+                max_value = node.value
+
+            if node.next:
+                node = node.next
+            else:
+                node = None
+        
+        return max_value
