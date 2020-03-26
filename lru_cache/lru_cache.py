@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append("../doubly_linked_list")
+
 from doubly_linked_list import DoublyLinkedList
 
 
@@ -28,7 +32,6 @@ class LRUCache:
         if key in self.storage:
             node = self.storage[key]
             self.list.move_to_front(node)
-            print(node.value)
             return node.value[1]
 
         return None

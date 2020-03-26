@@ -96,7 +96,7 @@ class BinarySearchTree:
         queue = Queue()
         queue.enqueue(node)
 
-        while queue.len() > 0:
+        while len(queue) > 0:
             current_node = queue.dequeue()
             print(current_node.value)
 
@@ -111,7 +111,7 @@ class BinarySearchTree:
         stack = Stack()
         stack.push(node)
 
-        while stack.len() > 0:
+        while len(stack) > 0:
             current_node = stack.pop()
             print(current_node.value)
 
